@@ -1,0 +1,71 @@
+---
+const { post } = Astro.props;
+const { data } = post;
+---
+<a class="case-card" href={`/case-files/${post.id}/`}>
+  <div class="case-topline">
+    <span class="case-number">CASE {data.caseNumber}</span>
+    <span class={`status status-${data.status}`}>{data.status}</span>
+  </div>
+
+  <h2>{data.title}</h2>
+  <p>{data.description}</p>
+
+  <div class="case-footer">
+    <div class="tags">
+      {data.tags.slice(0, 3).map((tag) => <span>#{tag}</span>)}
+    </div>
+    <span class="arrow">OPEN FILE →</span>
+  </div>
+</a>
+
+<style>
+  .case-card {
+    display: block;
+    padding: 24px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    text-decoration: none;
+    transition: transform .16s ease, box-shadow .16s ease;
+  }
+
+  .case-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--shadow);
+  }
+
+  .case-topline, .case-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .case-number, .status, .tags, .arrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .status {
+    border: 1px solid var(--ink);
+    padding: 4px 7px;
+  }
+
+  .status-solved { background: #d7ff7b; }
+  .status-open { background: #ffb3b3; }
+  .status-ongoing { background: #ffe27b; }
+
+  h2 {
+    font-size: clamp(1.4rem, 3vw, 2.3rem);
+    line-height: 1;
+    margin: 42px 0 12px;
+    max-width: 15ch;
+  }
+
+  p { color: var(--muted); line-height: 1.55; max-width: 62ch; }
+  .case-footer { margin-top: 30px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 9px; color: var(--accent-2); }
+  .arrow { color: var(--accent); }
+</style>

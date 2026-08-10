@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseCard from '../components/CaseCard.astro';
+
+const posts = (await getCollection('posts'))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+<BaseLayout>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">A cybersecurity diary</p>
+      <h1>How I Tricked AI Into Doing My Bidding</h1>
+      <p class="intro">
+        Lab notes, dead ends, tiny victories, questionable prompts, and the evidence
+        that I eventually figured it out.
+      </p>
+    </div>
+
+    <aside class="system-card">
+      <div><span>OPERATOR</span><strong>SKY</strong></div>
+      <div><span>ROLE</span><strong>SECURITY ANALYST IN PROGRESS</strong></div>
+      <div><span>AI STATUS</span><strong>SUPERVISED</strong></div>
+      <div><span>CURRENT THREAT</span><strong>CONFIG FILES</strong></div>
+    </aside>
+  </section>
+
+  <section class="manifesto">
+    <p>
+      I am learning cybersecurity in public. AI is my overconfident intern:
+      occasionally brilliant, frequently suspicious, and never allowed to merge to main without review.
+    </p>
+  </section>
+
+  <section class="case-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Evidence archive</p>
+        <h2>Case files</h2>
+      </div>
+      <span class="count">{String(posts.length).padStart(2, '0')} FILES</span>
+    </div>
+
+    <div class="case-grid">
+      {posts.map((post) => <CaseCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 92px 0 54px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
+    gap: 48px;
+    align-items: end;
+  }
+
+  h1 {
+    font-size: clamp(3.3rem, 8vw, 7.4rem);
+    line-height: .88;
+    letter-spacing: -.065em;
+    margin: 14px 0 24px;
+    max-width: 11ch;
+  }
+
+  .intro {
+    max-width: 660px;
+    font-size: clamp(1.08rem, 2vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .system-card {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    transform: rotate(1.2deg);
+  }
+
+  .system-card div {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 10px;
+    padding: 13px 15px;
+    border-bottom: 1px solid var(--line);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .72rem;
+  }
+
+  .system-card div:last-child { border-bottom: 0; }
+  .system-card span { color: var(--muted); }
+  .system-card strong { text-align: right; }
+
+  .manifesto {
+    border-block: 2px solid var(--ink);
+    padding: 28px 0;
+  }
+
+  .manifesto p {
+    max-width: 900px;
+    margin: 0;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    line-height: 1.28;
+    font-weight: 800;
+  }
+
+  .case-section { padding: 72px 0 0; }
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 26px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(2.8rem, 6vw, 5.3rem);
+    line-height: .9;
+    margin: 8px 0 0;
+  }
+
+  .count {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 800;
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  @media (max-width: 780px) {
+    .hero { grid-template-columns: 1fr; padding-top: 64px; }
+    .system-card { transform: none; }
+    .case-grid { grid-template-columns: 1fr; }
+  }
+</style>

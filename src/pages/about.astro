@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About — Sky.log">
+  <section class="about">
+    <p class="eyebrow">Operator profile</p>
+    <h1>Hi, I’m Sky.</h1>
+    <p>
+      I’m documenting my path into cybersecurity: the labs I build, the attacks I study,
+      the tools I misuse before learning to use them correctly, and the moments AI says
+      something with terrifying confidence that turns out to be completely false.
+    </p>
+    <p>
+      This site is part technical portfolio, part field journal, and part evidence that
+      persistence occasionally defeats configuration files.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .about { max-width: 780px; padding: 100px 0; }
+  h1 {
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: .9;
+    margin: 12px 0 34px;
+    letter-spacing: -.06em;
+  }
+  p { font-size: 1.35rem; line-height: 1.6; }
+</style>

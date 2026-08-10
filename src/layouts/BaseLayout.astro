@@ -1,0 +1,142 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'How I Tricked AI Into Doing My Bidding',
+  description = 'A cybersecurity diary by Sky.'
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">
+        <span class="brand-mark">SKY.LOG</span>
+        <span class="brand-status">SYSTEM ONLINE</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Case files</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <span>Built with Astro. Debugged with spite.</span>
+      <span>© {new Date().getFullYear()} Sky</span>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #f3f0e8;
+    --paper: #fffdf7;
+    --ink: #11110f;
+    --muted: #6b6a61;
+    --line: #c8c2b4;
+    --accent: #ef4f91;
+    --accent-2: #2857ff;
+    --danger: #de2f2f;
+    --shadow: 7px 7px 0 #11110f;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      linear-gradient(rgba(17,17,15,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,17,15,.045) 1px, transparent 1px),
+      var(--bg);
+    background-size: 28px 28px;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .site-header {
+    width: min(1120px, calc(100% - 32px));
+    margin: 24px auto 0;
+    padding: 16px 18px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 4px 4px 0 var(--ink);
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 800;
+  }
+
+  .brand-status {
+    font-size: .7rem;
+    border: 1px solid var(--ink);
+    padding: 3px 6px;
+    background: #d7ff7b;
+  }
+
+  nav { display: flex; gap: 18px; font-size: .9rem; font-weight: 700; }
+  nav a { text-decoration: none; }
+  nav a:hover { color: var(--accent-2); }
+
+  main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+  footer {
+    width: min(1120px, calc(100% - 32px));
+    margin: 72px auto 28px;
+    padding: 18px 0;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .82rem;
+  }
+
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 800;
+  }
+
+  @media (max-width: 700px) {
+    .site-header { align-items: flex-start; }
+    .brand-status { display: none; }
+    nav { gap: 10px; font-size: .78rem; }
+    footer { flex-direction: column; }
+  }
+</style>

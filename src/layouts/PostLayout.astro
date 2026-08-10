@@ -1,0 +1,147 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { entry } = Astro.props;
+const { title, description, caseNumber, status, tags, publishedAt, readTime, aiGrade } = entry.data;
+---
+<BaseLayout title={`${title} — Sky.log`} description={description}>
+  <article>
+    <header class="post-header">
+      <a class="back" href="/">← CASE FILES</a>
+      <div class="post-kicker">
+        <span>CASE {caseNumber}</span>
+        <span>{status}</span>
+      </div>
+      <h1>{title}</h1>
+      <p class="deck">{description}</p>
+
+      <dl class="metadata">
+        <div><dt>PUBLISHED</dt><dd>{publishedAt.toLocaleDateString('en-US')}</dd></div>
+        <div><dt>READ TIME</dt><dd>{readTime ?? 'Unknown'}</dd></div>
+        <div><dt>AI GRADE</dt><dd>{aiGrade ?? 'Pending review'}</dd></div>
+        <div><dt>TAGS</dt><dd>{tags.join(', ')}</dd></div>
+      </dl>
+    </header>
+
+    <div class="article-body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .post-header {
+    padding: 64px 0 42px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .back {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .78rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .post-kicker {
+    margin-top: 52px;
+    display: flex;
+    justify-content: space-between;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .post-header h1 {
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    line-height: .9;
+    letter-spacing: -.055em;
+    margin: 18px 0;
+    max-width: 13ch;
+  }
+
+  .deck {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 1.25rem;
+    line-height: 1.55;
+  }
+
+  .metadata {
+    margin: 44px 0 0;
+    border: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--paper);
+  }
+
+  .metadata div { padding: 13px; border-right: 1px solid var(--line); }
+  .metadata div:last-child { border-right: 0; }
+  .metadata dt {
+    font: 700 .68rem ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .metadata dd {
+    margin: 0;
+    font: 800 .78rem ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .article-body {
+    width: min(760px, 100%);
+    margin: 58px auto 0;
+    font-size: 1.08rem;
+    line-height: 1.78;
+  }
+
+  .article-body h2 {
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: -.04em;
+    margin: 2.4em 0 .6em;
+  }
+
+  .article-body h3 { font-size: 1.55rem; margin-top: 2.2em; }
+  .article-body p { margin: 1.2em 0; }
+  .article-body a { color: var(--accent-2); font-weight: 700; }
+  .article-body blockquote {
+    margin: 2em 0;
+    padding: 18px 22px;
+    border: 2px solid var(--ink);
+    border-left: 9px solid var(--accent);
+    background: var(--paper);
+    font-weight: 700;
+  }
+  .article-body pre {
+    overflow-x: auto;
+    padding: 20px;
+    border: 2px solid var(--ink);
+    background: #121212;
+    color: #f5f2e8;
+    box-shadow: 5px 5px 0 var(--accent);
+  }
+  .article-body code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .article-body :not(pre) > code {
+    padding: .15em .35em;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .article-body img {
+    width: 100%;
+    margin: 2em 0;
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .article-body hr {
+    border: 0;
+    border-top: 2px solid var(--ink);
+    margin: 3em 0;
+  }
+
+  @media (max-width: 760px) {
+    .metadata { grid-template-columns: repeat(2, 1fr); }
+    .metadata div:nth-child(2) { border-right: 0; }
+    .metadata div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  }
+</style>
