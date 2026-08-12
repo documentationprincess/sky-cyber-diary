@@ -1,0 +1,146 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'How I Tricked AI Into Doing My Bidding',
+  description = 'A cybersecurity diary by Sky.'
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" type="image/jpeg" href="/ui/docdocs-avatar.jpg" />
+  </head>
+
+  <body>
+    <header class="article-site-header">
+      <a class="article-brand" href="/">
+        <span>DOCUMENTATION PRINCESS</span>
+        <span class="article-status">SYSTEM ONLINE</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <a href="/">Case files</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/documentationprincess" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main class="article-main">
+      <slot />
+    </main>
+
+    <footer class="article-footer">
+      <span>Built with Astro. Debugged with spite.</span>
+      <span>© {new Date().getFullYear()} Sky</span>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #f3f0e8;
+    --paper: #fffdf7;
+    --ink: #11110f;
+    --muted: #6b6a61;
+    --line: #c8c2b4;
+    --accent: #ef4f91;
+    --accent-2: #2857ff;
+    --danger: #de2f2f;
+    --shadow: 7px 7px 0 #11110f;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      linear-gradient(rgba(17,17,15,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,17,15,.045) 1px, transparent 1px),
+      var(--bg);
+    background-size: 28px 28px;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .article-site-header {
+    width: min(1120px, calc(100% - 32px));
+    margin: 24px auto 0;
+    padding: 16px 18px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 4px 4px 0 var(--ink);
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+  }
+
+  .article-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 800;
+  }
+
+  .article-status {
+    font-size: .7rem;
+    border: 1px solid var(--ink);
+    padding: 3px 6px;
+    background: #d7ff7b;
+  }
+
+  .article-site-header nav {
+    display: flex;
+    gap: 18px;
+    font-size: .9rem;
+    font-weight: 700;
+  }
+
+  .article-site-header nav a { text-decoration: none; }
+  .article-site-header nav a:hover { color: var(--accent-2); }
+
+  .article-main {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .article-footer {
+    width: min(1120px, calc(100% - 32px));
+    margin: 72px auto 28px;
+    padding: 18px 0;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .82rem;
+  }
+
+  @media (max-width: 700px) {
+    .article-site-header { align-items: flex-start; }
+    .article-status { display: none; }
+    .article-site-header nav { gap: 10px; font-size: .78rem; }
+    .article-footer { flex-direction: column; }
+  }
+</style>

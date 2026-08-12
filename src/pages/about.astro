@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="About — Sky.log">
-  <section class="about">
+<BaseLayout title="About — Documentation Princess">
+  <section class="about-page">
     <p class="eyebrow">Operator profile</p>
     <h1>Hi, I’m Sky.</h1>
+
     <p>
       I’m documenting my path into cybersecurity: the labs I build, the attacks I study,
       the tools I misuse before learning to use them correctly, and the moments AI says
       something with terrifying confidence that turns out to be completely false.
     </p>
+
     <p>
       This site is part technical portfolio, part field journal, and part evidence that
       persistence occasionally defeats configuration files.
@@ -18,12 +20,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  .about { max-width: 780px; padding: 100px 0; }
+  .about-page {
+    width: min(920px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 76px 0 96px;
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-size: .92rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+
   h1 {
-    font-size: clamp(4rem, 10vw, 8rem);
-    line-height: .9;
-    margin: 12px 0 34px;
+    margin: 18px 0 36px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    line-height: .88;
     letter-spacing: -.06em;
   }
-  p { font-size: 1.35rem; line-height: 1.6; }
+
+  .about-page > p:not(.eyebrow) {
+    max-width: 780px;
+    margin: 0 0 30px;
+    font-size: clamp(1.08rem, 1.65vw, 1.35rem);
+    line-height: 1.62;
+  }
+
+  @media (max-width: 650px) {
+    .about-page {
+      width: min(100% - 36px, 920px);
+      padding: 54px 0 72px;
+    }
+
+    h1 { font-size: 4rem; }
+  }
 </style>

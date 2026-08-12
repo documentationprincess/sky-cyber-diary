@@ -1,138 +1,810 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CaseCard from '../components/CaseCard.astro';
 
 const posts = (await getCollection('posts'))
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
+
+const thumbFor = (caseNumber: string) => {
+  if (caseNumber === '003') return '/ui/case-linux.png';
+  if (caseNumber === '002') return '/ui/case-wazuh.png';
+  return '/ui/case-windows.png';
+};
 ---
-<BaseLayout>
-  <section class="hero">
-    <div>
-      <p class="eyebrow">A cybersecurity diary</p>
-      <h1>How I Tricked AI Into Doing My Bidding</h1>
-      <p class="intro">
-        Lab notes, dead ends, tiny victories, questionable prompts, and the evidence
-        that I eventually figured it out.
-      </p>
-    </div>
+<BaseLayout
+  title="Documentation Princess"
+  description="Real labs, real failures, real documentation."
+>
+  <section id="hero" class="hero">
+    <div class="avatar-column">
+      <div class="note-bubble">still figuring<br />it out...</div>
 
-    <aside class="system-card">
-      <div><span>OPERATOR</span><strong>SKY</strong></div>
-      <div><span>ROLE</span><strong>SECURITY ANALYST IN PROGRESS</strong></div>
-      <div><span>AI STATUS</span><strong>SUPERVISED</strong></div>
-      <div><span>CURRENT THREAT</span><strong>CONFIG FILES</strong></div>
-    </aside>
-  </section>
-
-  <section class="manifesto">
-    <p>
-      I am learning cybersecurity in public. AI is my overconfident intern:
-      occasionally brilliant, frequently suspicious, and never allowed to merge to main without review.
-    </p>
-  </section>
-
-  <section class="case-section">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Evidence archive</p>
-        <h2>Case files</h2>
+      <div class="avatar-ring">
+        <img
+          src="/ui/docdocs-avatar.jpg"
+          alt="Documentation Princess avatar"
+        />
       </div>
-      <span class="count">{String(posts.length).padStart(2, '0')} FILES</span>
     </div>
 
-    <div class="case-grid">
-      {posts.map((post) => <CaseCard post={post} />)}
+    <div class="hero-center">
+      <h1>sky blu degrate</h1>
+
+      <div class="role-strip">
+        IT SUPPORT <b>|</b> CYBERSECURITY <b>|</b> CHAOS COORDINATOR_
+      </div>
+
+      <div class="dialog">
+        <div class="dialog-title">
+          <strong>sky.exe</strong>
+          <span>— □ ×</span>
+        </div>
+
+        <div class="dialog-message">
+          the journey is full of<br />
+          rainbows and sharks.
+          <span class="heart">♡</span>
+        </div>
+      </div>
     </div>
+
+    <div class="sprite-column">
+      <div class="sprite-figure">
+        <p class="sprite-note">professionally<br />suspicious ↘</p>
+        <img
+          src="/ui/sky-pixel.png"
+          alt="Pixel-art Sky in a black suit"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard">
+    <section id="case-files" class="window cases-window">
+      <header class="window-title">
+        <span>▱ &nbsp;/latest - case files ✧</span>
+        <span>— □ ×</span>
+      </header>
+
+      <p class="window-subtitle">
+        real labs. <em>real failures.</em> real documentation.
+      </p>
+
+      <div class="case-list">
+        {posts.map((post) => (
+          <a class="case-card" href={`/case-files/${post.id}/`}>
+            <img src={thumbFor(post.data.caseNumber)} alt="" />
+
+            <div class="case-body">
+              <div class="case-top">
+                <div class="tags">
+                  {post.data.tags.slice(0, 3).map((tag) => <span>{tag}</span>)}
+                </div>
+
+                <time datetime={post.data.publishedAt.toISOString()}>
+                  {post.data.publishedAt.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: '2-digit',
+                    year: 'numeric'
+                  })}
+                </time>
+              </div>
+
+              <h2>
+                Case File #{post.data.caseNumber}:<br />
+                {post.data.title}
+              </h2>
+
+              <p>{post.data.description}</p>
+              <span class="case-arrow">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <a class="view-all" href="/#case-files">
+        &gt; view all case files &nbsp;▱
+      </a>
+    </section>
+
+    <aside class="sidebar">
+      <section id="about" class="window about-window">
+        <header class="window-title lavender">
+          <span>★ about.exe</span>
+          <span>— □ ×</span>
+        </header>
+
+        <div class="about-grid">
+          <img src="/ui/about-sky.png" alt="Sky" />
+
+          <p>
+            IT support by day, threat hunter in training by night.
+            <br /><br />
+            documenting the chaos so future me (or a recruiter) doesn’t have to ask.
+          </p>
+        </div>
+
+        <a class="panel-link" href="/about">
+          &gt; more about me <span>→</span>
+        </a>
+      </section>
+
+      <section id="mission" class="window mission-window">
+        <header class="window-title">
+          <span>☆ current mission</span>
+        </header>
+
+        <ul>
+          <li class="done"><span>☑</span> Security+</li>
+          <li class="done"><span>☑</span> ship cyber portfolio</li>
+          <li class="done"><span>☑</span> build SIEM lab</li>
+          <li><span>☐</span> land first security role</li>
+        </ul>
+
+        <div class="mission-bottom">
+          <span>progress:</span>
+          <strong>75%</strong>
+          <span class="hearts">♥ ♥ ♥ ♡</span>
+        </div>
+      </section>
+
+      <section class="window connect-window">
+        <header class="window-title green">
+          <span>&gt; connect</span>
+        </header>
+
+        <div class="connect-links">
+          <a href="https://github.com/documentationprincess" rel="noreferrer">
+            <span class="connect-label">
+              <span class="connect-icon">◉</span>
+              <span>GitHub</span>
+            </span>
+            <b>↗</b>
+          </a>
+
+          <a href="https://www.linkedin.com/" rel="noreferrer">
+            <span class="connect-label">
+              <span class="connect-icon linkedin-icon">in</span>
+              <span>LinkedIn</span>
+            </span>
+            <b>↗</b>
+          </a>
+
+          <a href="mailto:">
+            <span class="connect-label">
+              <span class="connect-icon">✉</span>
+              <span>Email</span>
+            </span>
+            <b>↗</b>
+          </a>
+        </div>
+      </section>
+    </aside>
   </section>
 </BaseLayout>
 
 <style>
   .hero {
-    padding: 92px 0 54px;
+    height: 38.2vw;
+    min-height: 420px;
+    padding: 2.5vw 2.7vw 2.2vw;
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
-    gap: 48px;
-    align-items: end;
+    grid-template-columns: 28.5vw minmax(0, 1fr) 16.5vw;
+    gap: 2vw;
+    align-items: center;
+    background:
+      radial-gradient(
+        circle,
+        rgba(240, 110, 189, .38) 0 1.42vw,
+        transparent 1.5vw
+      )
+      0 0 / 8.5vw 8.5vw,
+      #fffaf7;
+    border-bottom: .1vw solid #eb9bc8;
   }
+
+  .avatar-column {
+    position: relative;
+    padding-top: 1vw;
+  }
+
+  .avatar-ring {
+    width: 25vw;
+    height: 25vw;
+    border: .32vw solid #111;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: .55vw .55vw 0 rgba(239, 90, 167, .22);
+  }
+
+  .avatar-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .note-bubble {
+    position: absolute;
+    left: 0;
+    top: -1.1vw;
+    z-index: 2;
+    padding: .75vw .85vw;
+    border: .12vw solid #111;
+    border-radius: .6vw;
+    background: #fff;
+    box-shadow: .25vw .25vw 0 rgba(0, 0, 0, .13);
+    transform: rotate(-3deg);
+    font-size: .85vw;
+    line-height: 1.18;
+  }
+
+  .note-bubble::after {
+    content: "";
+    position: absolute;
+    left: 2.2vw;
+    bottom: -.65vw;
+    width: 1.1vw;
+    height: 1.1vw;
+    background: #fff;
+    border-right: .12vw solid #111;
+    border-bottom: .12vw solid #111;
+    transform: rotate(45deg);
+  }
+
+  .hero-center { min-width: 0; }
 
   h1 {
-    font-size: clamp(3.3rem, 8vw, 7.4rem);
-    line-height: .88;
+    margin: 0 0 2.15vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.6vw;
+    line-height: .82;
     letter-spacing: -.065em;
-    margin: 14px 0 24px;
-    max-width: 11ch;
+    text-transform: lowercase;
+    white-space: nowrap;
   }
 
-  .intro {
-    max-width: 660px;
-    font-size: clamp(1.08rem, 2vw, 1.35rem);
-    line-height: 1.5;
-    color: var(--muted);
+  .role-strip {
+    display: inline-block;
+    max-width: 100%;
+    padding: 1vw 1.35vw;
+    background: #070708;
+    color: #fff;
+    font-size: 1.16vw;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: .01em;
+    white-space: nowrap;
+    box-shadow: .34vw .34vw 0 rgba(239, 90, 167, .22);
   }
 
-  .system-card {
-    border: 2px solid var(--ink);
-    background: var(--paper);
-    box-shadow: var(--shadow);
-    transform: rotate(1.2deg);
+  .role-strip b {
+    padding: 0 .8vw;
+    color: #ef55a7;
   }
 
-  .system-card div {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 10px;
-    padding: 13px 15px;
-    border-bottom: 1px solid var(--line);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: .72rem;
+  .dialog {
+    width: 43vw;
+    max-width: 100%;
+    margin-top: 1.9vw;
+    background: var(--orange);
+    border: .2vw solid #111;
+    border-radius: .75vw .75vw 1vw .75vw;
+    box-shadow: .45vw .45vw 0 rgba(0, 0, 0, .15);
+    overflow: hidden;
   }
 
-  .system-card div:last-child { border-bottom: 0; }
-  .system-card span { color: var(--muted); }
-  .system-card strong { text-align: right; }
-
-  .manifesto {
-    border-block: 2px solid var(--ink);
-    padding: 28px 0;
-  }
-
-  .manifesto p {
-    max-width: 900px;
-    margin: 0;
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    line-height: 1.28;
-    font-weight: 800;
-  }
-
-  .case-section { padding: 72px 0 0; }
-  .section-heading {
+  .dialog-title {
     display: flex;
-    align-items: end;
     justify-content: space-between;
-    margin-bottom: 26px;
+    padding: .6vw .9vw;
+    border-bottom: .15vw solid #111;
+    font-size: .9vw;
   }
 
-  .section-heading h2 {
-    font-size: clamp(2.8rem, 6vw, 5.3rem);
-    line-height: .9;
-    margin: 8px 0 0;
+  .dialog-message {
+    position: relative;
+    padding: 1.4vw 1.9vw 1.6vw;
+    font-size: 2.05vw;
+    line-height: 1.05;
+    font-weight: 900;
   }
 
-  .count {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-weight: 800;
+  .heart {
+    position: absolute;
+    right: 1.7vw;
+    bottom: .55vw;
+    font-size: 1.9vw;
   }
 
-  .case-grid {
+  .sprite-column {
+    padding-top: 1.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sprite-figure {
+    position: relative;
+    width: 14vw;
+  }
+
+  .sprite-figure img {
+    width: 100%;
+    image-rendering: pixelated;
+    filter: drop-shadow(.35vw .5vw 0 rgba(0, 0, 0, .14));
+  }
+
+  .sprite-note {
+    position: absolute;
+    z-index: 2;
+    left: -6.9vw;
+    top: .3vw;
+    margin: 0;
+    text-align: right;
+    font-size: .8vw;
+    line-height: 1.15;
+    transform: rotate(-3deg);
+    white-space: nowrap;
+  }
+
+  .dashboard {
+    padding: 2.8vw 3vw 3vw;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
+    grid-template-columns: minmax(0, 2fr) minmax(21vw, .95fr);
+    gap: 1.9vw;
+    align-items: start;
+    background:
+      radial-gradient(
+        circle,
+        rgba(240, 110, 189, .2) 0 1.35vw,
+        transparent 1.45vw
+      )
+      1.5vw 2vw / 8.6vw 8.6vw,
+      #fffaf7;
   }
 
-  @media (max-width: 780px) {
-    .hero { grid-template-columns: 1fr; padding-top: 64px; }
-    .system-card { transform: none; }
-    .case-grid { grid-template-columns: 1fr; }
+  .window {
+    background: rgba(255, 253, 250, .97);
+    border: .16vw solid #111;
+    border-radius: .75vw;
+    box-shadow: .43vw .5vw 0 #111;
+    overflow: hidden;
+  }
+
+  .window-title {
+    min-height: 3.75vw;
+    padding: .75vw 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1vw;
+    background: linear-gradient(#ffc5e6, #ed91c7);
+    border-bottom: .16vw solid #111;
+    font-size: 1.28vw;
+    font-weight: 900;
+  }
+
+  .cases-window > .window-title {
+    background: #f09040;
+  }
+
+  .window-title.lavender {
+    background: linear-gradient(#efd5ff, #ddb3ee);
+  }
+
+  .window-title.green {
+    background: linear-gradient(#eaffaa, #cdef6d);
+  }
+
+  .window-subtitle {
+    margin: 0;
+    padding: 1.2vw 1.55vw .75vw;
+    font-size: 1.02vw;
+  }
+
+  .window-subtitle em {
+    color: #7a496c;
+    font-style: normal;
+  }
+
+  .case-list {
+    padding: 1vw 1.15vw .15vw;
+  }
+
+  .case-card {
+    min-height: 17.2vw;
+    padding: 1.35vw;
+    display: grid;
+    grid-template-columns: 16.2vw minmax(0, 1fr);
+    gap: 1.5vw;
+    border: .1vw solid #222;
+    border-radius: .65vw;
+    margin-bottom: .75vw;
+    background: rgba(255, 255, 255, .55);
+    color: inherit;
+    text-decoration: none;
+    transition: transform .13s ease, box-shadow .13s ease;
+  }
+
+  .case-card:hover {
+    transform: translate(-.2vw, -.2vw);
+    box-shadow: .4vw .4vw 0 #f08fca;
+  }
+
+  .case-card > img {
+    width: 16.2vw;
+    height: 15.2vw;
+    border-radius: .45vw;
+    object-fit: cover;
+    border: .11vw solid #111;
+    background: #111;
+  }
+
+  .case-body {
+    min-width: 0;
+    position: relative;
+    padding-bottom: 1.6vw;
+  }
+
+  .case-top {
+    display: flex;
+    justify-content: space-between;
+    gap: .7vw;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4vw;
+  }
+
+  .tags span {
+    padding: .3vw .55vw;
+    background: #f6c4e1;
+    border: .07vw solid #c875a6;
+    border-radius: 999px;
+    font-size: .74vw;
+    text-transform: uppercase;
+  }
+
+  time {
+    font-size: .78vw;
+    white-space: nowrap;
+  }
+
+  .case-card h2 {
+    margin: 1vw 0 .65vw;
+    font-size: 1.82vw;
+    line-height: 1.02;
+  }
+
+  .case-card p {
+    margin: 0;
+    color: #3b3439;
+    font-size: 1.02vw;
+    line-height: 1.48;
+    max-width: 70ch;
+  }
+
+  .case-arrow {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 1.5vw;
+  }
+
+  .view-all {
+    display: block;
+    padding: .8vw 1.55vw 1.35vw;
+    color: #c83c8c;
+    font-size: 1.02vw;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .sidebar {
+    display: grid;
+    gap: 1.25vw;
+  }
+
+  .about-grid {
+    padding: 1.4vw;
+    display: grid;
+    grid-template-columns: 10.8vw 1fr;
+    gap: 1.35vw;
+  }
+
+  .about-grid img {
+    width: 10.8vw;
+    height: 14.2vw;
+    object-fit: cover;
+    object-position: 42% 20%;
+    border: .1vw solid #111;
+    border-radius: .5vw;
+  }
+
+  .about-grid p {
+    margin: 0;
+    font-size: 1vw;
+    line-height: 1.5;
+  }
+
+  .panel-link {
+    display: flex;
+    justify-content: space-between;
+    padding: .35vw 1.4vw 1.3vw;
+    font-size: .98vw;
+    font-weight: 900;
+  }
+
+  .mission-window ul {
+    list-style: none;
+    margin: 0;
+    padding: .85vw 1.15vw .35vw;
+  }
+
+  .mission-window li {
+    padding: .42vw 0;
+    border-bottom: .05vw solid rgba(0, 0, 0, .15);
+    font-size: .96vw;
+  }
+
+  .mission-window .done {
+    color: #7b7378;
+    text-decoration: line-through;
+  }
+
+  .mission-bottom {
+    padding: .65vw 1.15vw 1vw;
+    display: flex;
+    align-items: center;
+    gap: .65vw;
+    font-size: .96vw;
+  }
+
+  .mission-bottom strong { color: #e33e94; }
+
+  .hearts {
+    margin-left: auto;
+    color: #e33e94;
+    font-size: 1.1vw;
+  }
+
+  .connect-links {
+    padding: .4vw 1vw .8vw;
+  }
+
+  .connect-links a {
+    display: flex;
+    justify-content: space-between;
+    padding: .7vw 0;
+    border-bottom: .05vw solid rgba(0, 0, 0, .15);
+    font-size: .98vw;
+    text-decoration: none;
+  }
+
+  .connect-links a:last-child {
+    border-bottom: 0;
+  }
+
+  .connect-label {
+    display: grid;
+    grid-template-columns: 2.65em auto;
+    align-items: center;
+    column-gap: .35em;
+  }
+
+  .connect-icon {
+    width: 2.65em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 900;
+  }
+
+  .linkedin-icon {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    letter-spacing: -.08em;
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      height: auto;
+      min-height: 0;
+      padding: 58px 18px 34px;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      text-align: center;
+      background:
+        radial-gradient(circle, rgba(240, 110, 189, .36) 0 15px, transparent 16px)
+        0 0 / 88px 88px,
+        #fffaf7;
+    }
+
+    .avatar-column {
+      width: fit-content;
+      margin: 0 auto;
+      padding-top: 20px;
+    }
+
+    .avatar-ring {
+      width: 230px;
+      height: 230px;
+      border-width: 4px;
+    }
+
+    .note-bubble {
+      left: -6px;
+      top: -12px;
+      padding: 9px 10px;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin-bottom: 28px;
+      font-size: clamp(3.8rem, 16vw, 6rem);
+      white-space: normal;
+    }
+
+    .role-strip {
+      margin-inline: auto;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: normal;
+    }
+
+    .dialog {
+      width: min(520px, 100%);
+      margin: 18px auto 0;
+      border-width: 2px;
+      text-align: left;
+    }
+
+    .dialog-title {
+      padding: 7px 10px;
+      font-size: 11px;
+      border-bottom-width: 2px;
+    }
+
+    .dialog-message {
+      padding: 18px 20px 22px;
+      font-size: 24px;
+    }
+
+    .heart {
+      right: 15px;
+      bottom: 8px;
+      font-size: 24px;
+    }
+
+    .sprite-column { display: none; }
+
+    .dashboard {
+      padding: 18px;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      background:
+        radial-gradient(circle, rgba(240, 110, 189, .2) 0 14px, transparent 15px)
+        16px 20px / 88px 88px,
+        #fffaf7;
+    }
+
+    .window {
+      border-width: 2px;
+      border-radius: 9px;
+      box-shadow: 5px 6px 0 #111;
+    }
+
+    .window-title {
+      min-height: 42px;
+      padding: 9px 12px;
+      border-bottom-width: 2px;
+      font-size: 13px;
+    }
+
+    .window-subtitle {
+      padding: 10px 13px 7px;
+      font-size: 11px;
+    }
+
+    .case-list { padding: 8px 10px 0; }
+
+    .case-card {
+      min-height: 0;
+      padding: 12px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+      border-width: 1px;
+      border-radius: 8px;
+    }
+
+    .case-card > img {
+      width: 100%;
+      height: 180px;
+      border-radius: 7px;
+    }
+
+    .case-body { padding-bottom: 24px; }
+
+    .tags { gap: 5px; }
+
+    .tags span {
+      padding: 4px 7px;
+      font-size: 9px;
+    }
+
+    time { font-size: 10px; }
+
+    .case-card h2 {
+      margin: 12px 0 7px;
+      font-size: 20px;
+    }
+
+    .case-card p {
+      font-size: 12px;
+    }
+
+    .case-arrow {
+      font-size: 22px;
+    }
+
+    .view-all {
+      padding: 8px 15px 14px;
+      font-size: 12px;
+    }
+
+    .sidebar { gap: 16px; }
+
+    .about-grid {
+      padding: 12px;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+    }
+
+    .about-grid img {
+      width: 110px;
+      height: 155px;
+      border-width: 1px;
+      border-radius: 7px;
+    }
+
+    .about-grid p {
+      font-size: 11px;
+    }
+
+    .panel-link {
+      padding: 3px 12px 12px;
+      font-size: 11px;
+    }
+
+    .mission-window ul {
+      padding: 12px 14px 5px;
+    }
+
+    .mission-window li {
+      padding: 6px 0;
+      font-size: 11px;
+    }
+
+    .mission-bottom {
+      padding: 8px 14px 13px;
+      font-size: 11px;
+    }
+
+    .hearts { font-size: 16px; }
+
+    .connect-links {
+      padding: 5px 12px 10px;
+    }
+
+    .connect-links a {
+      padding: 9px 0;
+      font-size: 11px;
+    }
   }
 </style>

@@ -23,6 +23,10 @@ const {
 
   <body>
     <div class="browser-shell">
+        <div class="fake-address">🔒 &nbsp; https://documentationprincess.vercel.app</div>
+        <div class="browser-icons">☆ &nbsp; ☠</div>
+      </div>
+
       <header class="site-header">
         <a class="brand" href="/">
           <span class="brand-icon">☠</span>
@@ -32,7 +36,7 @@ const {
         <nav aria-label="Primary navigation">
           <a href="/#case-files">CASE FILES</a><i>/</i>
           <a href="/#hero">DIARY</a><i>/</i>
-          <a href="/about">ABOUT</a><i>/</i>
+          <a href="/#about">ABOUT</a><i>/</i>
           <a href="/#mission">TOOLS</a><i>/</i>
           <a href="https://github.com/documentationprincess" rel="noreferrer">GITHUB ↗</a>
         </nav>
@@ -101,6 +105,8 @@ const {
     background: var(--paper);
     overflow: hidden;
   }
+
+  .browser-controls,
 
   .site-header {
     height: 5.5vw;
@@ -176,6 +182,8 @@ const {
 
   @media (max-width: 760px) {
     body { background-size: 28px 28px; }
+
+    .browser-chrome,
 
     .site-header {
       min-height: 58px;

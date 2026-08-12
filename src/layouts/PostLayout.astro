@@ -1,17 +1,19 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+import ArticleBaseLayout from './ArticleBaseLayout.astro';
 
 const { entry } = Astro.props;
 const { title, description, caseNumber, status, tags, publishedAt, readTime, aiGrade } = entry.data;
 ---
-<BaseLayout title={`${title} — Sky.log`} description={description}>
+<ArticleBaseLayout title={`${title} — Documentation Princess`} description={description}>
   <article>
     <header class="post-header">
       <a class="back" href="/">← CASE FILES</a>
+
       <div class="post-kicker">
         <span>CASE {caseNumber}</span>
         <span>{status}</span>
       </div>
+
       <h1>{title}</h1>
       <p class="deck">{description}</p>
 
@@ -27,7 +29,7 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
       <slot />
     </div>
   </article>
-</BaseLayout>
+</ArticleBaseLayout>
 
 <style is:global>
   .post-header {
@@ -74,13 +76,19 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
     background: var(--paper);
   }
 
-  .metadata div { padding: 13px; border-right: 1px solid var(--line); }
+  .metadata div {
+    padding: 13px;
+    border-right: 1px solid var(--line);
+  }
+
   .metadata div:last-child { border-right: 0; }
+
   .metadata dt {
     font: 700 .68rem ui-monospace, SFMono-Regular, Menlo, monospace;
     color: var(--muted);
     margin-bottom: 6px;
   }
+
   .metadata dd {
     margin: 0;
     font: 800 .78rem ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -100,9 +108,14 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
     margin: 2.4em 0 .6em;
   }
 
-  .article-body h3 { font-size: 1.55rem; margin-top: 2.2em; }
+  .article-body h3 {
+    font-size: 1.55rem;
+    margin-top: 2.2em;
+  }
+
   .article-body p { margin: 1.2em 0; }
   .article-body a { color: var(--accent-2); font-weight: 700; }
+
   .article-body blockquote {
     margin: 2em 0;
     padding: 18px 22px;
@@ -111,6 +124,7 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
     background: var(--paper);
     font-weight: 700;
   }
+
   .article-body pre {
     overflow-x: auto;
     padding: 20px;
@@ -119,20 +133,24 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
     color: #f5f2e8;
     box-shadow: 5px 5px 0 var(--accent);
   }
+
   .article-body code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
+
   .article-body :not(pre) > code {
     padding: .15em .35em;
     border: 1px solid var(--line);
     background: var(--paper);
   }
+
   .article-body img {
     width: 100%;
     margin: 2em 0;
     border: 2px solid var(--ink);
     box-shadow: 6px 6px 0 var(--ink);
   }
+
   .article-body hr {
     border: 0;
     border-top: 2px solid var(--ink);
