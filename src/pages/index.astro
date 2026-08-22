@@ -15,10 +15,15 @@ const thumbFor = (caseNumber: string) => {
 <BaseLayout
   title="Documentation Princess"
   description="Real labs, real failures, real documentation."
+  showHeader={false}
 >
   <section id="hero" class="hero">
     <div class="avatar-column">
-      <div class="note-bubble">still figuring<br />it out...</div>
+      <div class="avatar-grid" aria-hidden="true"></div>
+
+      <div class="note-bubble">
+        still<br />figuring<br />it out...
+      </div>
 
       <div class="avatar-ring">
         <img
@@ -29,36 +34,46 @@ const thumbFor = (caseNumber: string) => {
     </div>
 
     <div class="hero-center">
-      <h1>sky blu degrate</h1>
+      <div class="name-row">
+        <h1>sky blu degrate</h1>
+        <span class="sparkle" aria-hidden="true">✦</span>
+      </div>
 
       <div class="role-strip">
         IT SUPPORT <b>|</b> CYBERSECURITY <b>|</b> CHAOS COORDINATOR_
       </div>
 
-      <div class="dialog">
-        <div class="dialog-title">
-          <strong>sky.exe</strong>
-          <span>— □ ×</span>
-        </div>
+      <p class="hero-tagline">
+        real labs. <em>real failures.</em> real documentation.
+      </p>
 
-        <div class="dialog-message">
-          the journey is full of<br />
-          rainbows and sharks.
-          <span class="heart">♡</span>
-        </div>
-      </div>
+      <p class="location">
+        <span aria-hidden="true">●</span> NYC / BROOKLYN
+      </p>
     </div>
 
-    <div class="sprite-column">
-      <div class="sprite-figure">
-        <p class="sprite-note">professionally<br />suspicious ↘</p>
-        <img
-          src="/ui/sky-pixel.png"
-          alt="Pixel-art Sky in a black suit"
-        />
-      </div>
-    </div>
+    <aside class="status-card" aria-label="Current status">
+      <div class="status-prompt">&gt;_</div>
+      <p><span>+</span> <strong>professionally<br />suspicious</strong></p>
+      <p><span>+</span> threat hunter<br />in training</p>
+      <p><span>+</span> documenting<br />the chaos</p>
+      <div class="status-skull" aria-hidden="true">☠</div>
+    </aside>
   </section>
+
+  <nav class="home-nav" aria-label="Homepage navigation">
+    <div class="home-nav-links">
+      <a class="active" href="/#case-files">/ CASE FILES</a>
+      <a href="/about">/ ABOUT</a>
+      <a href="https://github.com/documentationprincess" rel="noreferrer">/ GITHUB ↗</a>
+      <a href="https://www.linkedin.com/in/skydegrate/" rel="noreferrer">/ LINKEDIN ↗</a>
+      <a href="mailto:skybludegrate.cybersec@gmail.com">/ CONTACT</a>
+    </div>
+
+    <div class="home-nav-status" aria-hidden="true">
+      <span>●</span> online
+    </div>
+  </nav>
 
   <section class="dashboard">
     <section id="case-files" class="window cases-window">
@@ -111,7 +126,7 @@ const thumbFor = (caseNumber: string) => {
     <aside class="sidebar">
       <section id="about" class="window about-window">
         <header class="window-title lavender">
-          <span>★ about.exe</span>
+          <span>✦ /about.exe</span>
           <span>— □ ×</span>
         </header>
 
@@ -119,7 +134,9 @@ const thumbFor = (caseNumber: string) => {
           <img src="/ui/about-sky.png" alt="Sky" />
 
           <p>
-            IT support by day, threat hunter in training by night.
+            IT support by day,<br />
+            threat hunter in<br />
+            training by night.
             <br /><br />
             documenting the chaos so future me (or a recruiter) doesn’t have to ask.
           </p>
@@ -131,21 +148,15 @@ const thumbFor = (caseNumber: string) => {
       </section>
 
       <section id="mission" class="window mission-window">
-        <header class="window-title">
-          <span>☆ current mission</span>
+        <header class="window-title pink">
+          <span>✦ /current mission</span>
+          <span>— □ ×</span>
         </header>
 
-        <ul>
-          <li class="done"><span>☑</span> Security+</li>
-          <li class="done"><span>☑</span> ship cyber portfolio</li>
-          <li class="done"><span>☑</span> build SIEM lab</li>
-          <li><span>☐</span> land first security role</li>
-        </ul>
-
-        <div class="mission-bottom">
-          <span>progress:</span>
-          <strong>75%</strong>
-          <span class="hearts">♥ ♥ ♥ ♡</span>
+        <div class="mission-terminal">
+          <p>&gt; build skills</p>
+          <p>&gt; help people</p>
+          <p>&gt; find bugs, not people <span class="cursor">▮</span></p>
         </div>
       </section>
 
@@ -186,37 +197,45 @@ const thumbFor = (caseNumber: string) => {
 
 <style>
   .hero {
-    height: 38.2vw;
-    min-height: 420px;
-    padding: 2.5vw 2.7vw 2.2vw;
+    min-height: 31vw;
+    padding: 2.4vw 3vw 2vw 4.2vw;
     display: grid;
-    grid-template-columns: 28.5vw minmax(0, 1fr) 16.5vw;
-    gap: 2vw;
+    grid-template-columns: 28vw minmax(0, 1fr) 15vw;
+    gap: 2.8vw;
     align-items: center;
-    background:
-      radial-gradient(
-        circle,
-        rgba(240, 110, 189, .38) 0 1.42vw,
-        transparent 1.5vw
-      )
-      0 0 / 8.5vw 8.5vw,
-      #fffaf7;
-    border-bottom: .1vw solid #eb9bc8;
+    background: #fffaf7;
+    border-bottom: .08vw solid #e8dfe1;
   }
 
   .avatar-column {
     position: relative;
-    padding-top: 1vw;
+    width: 27vw;
+    height: 27vw;
+    display: grid;
+    place-items: center;
+  }
+
+  .avatar-grid {
+    position: absolute;
+    inset: -1.8vw -1.2vw -1.3vw -1.1vw;
+    opacity: .8;
+    background:
+      linear-gradient(rgba(237, 100, 171, .18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 100, 171, .18) 1px, transparent 1px);
+    background-size: 1.15vw 1.15vw;
+    mask-image: linear-gradient(to right, #000 0 78%, transparent 100%);
   }
 
   .avatar-ring {
-    width: 25vw;
-    height: 25vw;
-    border: .32vw solid #111;
-    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    width: 24vw;
+    height: 24vw;
     overflow: hidden;
+    border: .18vw solid #111;
+    border-radius: 50%;
     background: #fff;
-    box-shadow: .55vw .55vw 0 rgba(239, 90, 167, .22);
+    box-shadow: .22vw .3vw 0 rgba(0, 0, 0, .08);
   }
 
   .avatar-ring img {
@@ -227,218 +246,266 @@ const thumbFor = (caseNumber: string) => {
 
   .note-bubble {
     position: absolute;
-    left: 0;
-    top: -1.1vw;
-    z-index: 2;
-    padding: .75vw .85vw;
+    z-index: 3;
+    left: -.5vw;
+    top: -.7vw;
+    padding: .75vw 1vw;
     border: .12vw solid #111;
-    border-radius: .6vw;
-    background: #fff;
-    box-shadow: .25vw .25vw 0 rgba(0, 0, 0, .13);
-    transform: rotate(-3deg);
-    font-size: .85vw;
-    line-height: 1.18;
+    border-radius: .4vw;
+    background: #0c0d0e;
+    color: #96ff72;
+    box-shadow: .23vw .23vw 0 rgba(0, 0, 0, .1);
+    font-size: .82vw;
+    font-weight: 800;
+    line-height: 1.25;
   }
 
   .note-bubble::after {
     content: "";
     position: absolute;
-    left: 2.2vw;
-    bottom: -.65vw;
-    width: 1.1vw;
-    height: 1.1vw;
-    background: #fff;
+    left: 2.4vw;
+    bottom: -.58vw;
+    width: 1vw;
+    height: 1vw;
+    background: #0c0d0e;
     border-right: .12vw solid #111;
     border-bottom: .12vw solid #111;
     transform: rotate(45deg);
   }
 
-  .hero-center { min-width: 0; }
+  .hero-center {
+    min-width: 0;
+    align-self: center;
+  }
+
+  .name-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1vw;
+  }
 
   h1 {
-    margin: 0 0 2.15vw;
+    margin: 0 0 1.6vw;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 6.6vw;
-    line-height: .82;
+    font-size: 6.2vw;
+    line-height: .9;
     letter-spacing: -.065em;
     text-transform: lowercase;
     white-space: nowrap;
   }
 
+  .sparkle {
+    margin-top: -.3vw;
+    color: #e64095;
+    font-size: 2.7vw;
+    line-height: 1;
+  }
+
   .role-strip {
     display: inline-block;
     max-width: 100%;
-    padding: 1vw 1.35vw;
-    background: #070708;
+    padding: .95vw 1.25vw;
+    background: #08090a;
     color: #fff;
-    font-size: 1.16vw;
+    font-size: 1.05vw;
     font-weight: 900;
     line-height: 1;
     letter-spacing: .01em;
     white-space: nowrap;
-    box-shadow: .34vw .34vw 0 rgba(239, 90, 167, .22);
   }
 
   .role-strip b {
-    padding: 0 .8vw;
-    color: #ef55a7;
+    padding: 0 .72vw;
+    color: #e74097;
   }
 
-  .dialog {
-    width: 43vw;
-    max-width: 100%;
-    margin-top: 1.9vw;
-    background: var(--orange);
-    border: .2vw solid #111;
-    border-radius: .75vw .75vw 1vw .75vw;
-    box-shadow: .45vw .45vw 0 rgba(0, 0, 0, .15);
-    overflow: hidden;
+  .hero-tagline {
+    margin: 1.8vw 0 0;
+    font-size: 1.2vw;
+    line-height: 1.4;
   }
 
-  .dialog-title {
-    display: flex;
-    justify-content: space-between;
-    padding: .6vw .9vw;
-    border-bottom: .15vw solid #111;
-    font-size: .9vw;
+  .hero-tagline em {
+    color: #e43e94;
+    font-style: normal;
   }
 
-  .dialog-message {
-    position: relative;
-    padding: 1.4vw 1.9vw 1.6vw;
-    font-size: 2.05vw;
-    line-height: 1.05;
+  .location {
+    margin: 1.45vw 0 0;
+    font-size: 1.05vw;
+    font-weight: 800;
+  }
+
+  .location span {
+    margin-right: .6vw;
+    color: #e43e94;
+  }
+
+  .status-card {
+    align-self: center;
+    min-height: 15.5vw;
+    padding: 1.2vw 1.25vw;
+    border: .1vw dashed #7d7d7d;
+    border-radius: .5vw;
+    background: rgba(255, 255, 255, .5);
+    box-shadow: .25vw .3vw 0 rgba(0, 0, 0, .03);
+    font-size: .88vw;
+    line-height: 1.28;
+  }
+
+  .status-prompt {
+    margin-bottom: 1vw;
+    font-size: 1.35vw;
     font-weight: 900;
   }
 
-  .heart {
-    position: absolute;
-    right: 1.7vw;
-    bottom: .55vw;
-    font-size: 1.9vw;
+  .status-card p {
+    display: grid;
+    grid-template-columns: 1.2em 1fr;
+    gap: .3vw;
+    margin: .75vw 0;
   }
 
-  .sprite-column {
-    padding-top: 1.8vw;
+  .status-card p > span {
+    font-weight: 900;
+  }
+
+  .status-card strong {
+    color: #63bb45;
+    font-weight: 900;
+  }
+
+  .status-skull {
+    margin-top: 1vw;
+    color: #e43e94;
+    text-align: center;
+    font-size: 1.35vw;
+  }
+
+  .home-nav {
+    min-height: 4.25vw;
+    padding: 0 3.8vw;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 2vw;
+    background: #07090a;
+    color: #f8f4f1;
+    border-bottom: .08vw solid #232323;
   }
 
-  .sprite-figure {
-    position: relative;
-    width: 14vw;
+  .home-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.4vw;
+    overflow-x: auto;
   }
 
-  .sprite-figure img {
-    width: 100%;
-    image-rendering: pixelated;
-    filter: drop-shadow(.35vw .5vw 0 rgba(0, 0, 0, .14));
+  .home-nav a {
+    flex: 0 0 auto;
+    font-size: .85vw;
+    font-weight: 800;
+    text-decoration: none;
   }
 
-  .sprite-note {
-    position: absolute;
-    z-index: 2;
-    left: -6.9vw;
-    top: .3vw;
-    margin: 0;
-    text-align: right;
-    font-size: .8vw;
-    line-height: 1.15;
-    transform: rotate(-3deg);
-    white-space: nowrap;
+  .home-nav a:hover,
+  .home-nav .active {
+    color: #f05ba6;
+  }
+
+  .home-nav-status {
+    flex: 0 0 auto;
+    color: #86f66c;
+    font-size: .78vw;
   }
 
   .dashboard {
-    padding: 2.8vw 3vw 3vw;
+    padding: 2.1vw 2.7vw 3vw;
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(21vw, .95fr);
+    grid-template-columns: minmax(0, 2fr) minmax(22vw, .95fr);
     gap: 1.9vw;
     align-items: start;
-    background:
-      radial-gradient(
-        circle,
-        rgba(240, 110, 189, .2) 0 1.35vw,
-        transparent 1.45vw
-      )
-      1.5vw 2vw / 8.6vw 8.6vw,
-      #fffaf7;
+    background: #fffaf7;
   }
 
   .window {
-    background: rgba(255, 253, 250, .97);
-    border: .16vw solid #111;
-    border-radius: .75vw;
-    box-shadow: .43vw .5vw 0 #111;
+    background: rgba(255, 253, 250, .98);
+    border: .12vw solid #111;
+    border-radius: .6vw;
+    box-shadow: .25vw .28vw 0 rgba(17, 17, 17, .85);
     overflow: hidden;
   }
 
   .window-title {
-    min-height: 3.75vw;
-    padding: .75vw 1vw;
+    min-height: 3.35vw;
+    padding: .68vw 1vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1vw;
-    background: linear-gradient(#ffc5e6, #ed91c7);
-    border-bottom: .16vw solid #111;
-    font-size: 1.28vw;
+    background: #fff;
+    border-bottom: .1vw solid #111;
+    font-size: 1.15vw;
     font-weight: 900;
   }
 
   .cases-window > .window-title {
-    background: #f09040;
+    background: #fff;
   }
 
   .window-title.lavender {
-    background: linear-gradient(#efd5ff, #ddb3ee);
+    background: #f1dcf7;
+  }
+
+  .window-title.pink {
+    background: #f3afd0;
   }
 
   .window-title.green {
-    background: linear-gradient(#eaffaa, #cdef6d);
+    background: #d8ff75;
   }
 
   .window-subtitle {
     margin: 0;
-    padding: 1.2vw 1.55vw .75vw;
-    font-size: 1.02vw;
+    padding: 1.05vw 1.35vw .65vw;
+    font-size: .98vw;
   }
 
   .window-subtitle em {
-    color: #7a496c;
+    color: #d13d88;
     font-style: normal;
   }
 
   .case-list {
-    padding: 1vw 1.15vw .15vw;
+    padding: .85vw 1vw .15vw;
   }
 
   .case-card {
-    min-height: 17.2vw;
-    padding: 1.35vw;
+    min-height: 15.8vw;
+    padding: 1.2vw;
     display: grid;
-    grid-template-columns: 16.2vw minmax(0, 1fr);
-    gap: 1.5vw;
-    border: .1vw solid #222;
-    border-radius: .65vw;
-    margin-bottom: .75vw;
-    background: rgba(255, 255, 255, .55);
+    grid-template-columns: 15vw minmax(0, 1fr);
+    gap: 1.35vw;
+    border: .08vw solid #2b2b2b;
+    border-radius: .55vw;
+    margin-bottom: .8vw;
+    background: #fff;
     color: inherit;
     text-decoration: none;
     transition: transform .13s ease, box-shadow .13s ease;
   }
 
   .case-card:hover {
-    transform: translate(-.2vw, -.2vw);
-    box-shadow: .4vw .4vw 0 #f08fca;
+    transform: translate(-.12vw, -.12vw);
+    box-shadow: .28vw .28vw 0 #ef69ad;
   }
 
   .case-card > img {
-    width: 16.2vw;
-    height: 15.2vw;
-    border-radius: .45vw;
+    width: 15vw;
+    height: 13.9vw;
+    border-radius: .4vw;
     object-fit: cover;
-    border: .11vw solid #111;
+    border: .08vw solid #111;
     background: #111;
   }
 
@@ -461,30 +528,30 @@ const thumbFor = (caseNumber: string) => {
   }
 
   .tags span {
-    padding: .3vw .55vw;
-    background: #f6c4e1;
-    border: .07vw solid #c875a6;
+    padding: .28vw .55vw;
+    background: #f8d9e9;
+    border: .05vw solid #e9aacb;
     border-radius: 999px;
-    font-size: .74vw;
+    font-size: .69vw;
     text-transform: uppercase;
   }
 
   time {
-    font-size: .78vw;
+    font-size: .72vw;
     white-space: nowrap;
   }
 
   .case-card h2 {
-    margin: 1vw 0 .65vw;
-    font-size: 1.82vw;
+    margin: .85vw 0 .55vw;
+    font-size: 1.72vw;
     line-height: 1.02;
   }
 
   .case-card p {
     margin: 0;
     color: #3b3439;
-    font-size: 1.02vw;
-    line-height: 1.48;
+    font-size: .98vw;
+    line-height: 1.45;
     max-width: 70ch;
   }
 
@@ -492,88 +559,77 @@ const thumbFor = (caseNumber: string) => {
     position: absolute;
     right: 0;
     bottom: 0;
-    font-size: 1.5vw;
+    font-size: 1.4vw;
   }
 
   .view-all {
     display: block;
-    padding: .8vw 1.55vw 1.35vw;
-    color: #c83c8c;
-    font-size: 1.02vw;
+    padding: .65vw 1.35vw 1.2vw;
+    color: #cf3c8a;
+    font-size: .95vw;
     font-weight: 900;
     text-decoration: none;
   }
 
   .sidebar {
     display: grid;
-    gap: 1.25vw;
+    gap: 1.15vw;
   }
 
   .about-grid {
-    padding: 1.4vw;
+    padding: 1.2vw;
     display: grid;
-    grid-template-columns: 10.8vw 1fr;
-    gap: 1.35vw;
+    grid-template-columns: 10.5vw 1fr;
+    gap: 1.2vw;
   }
 
   .about-grid img {
-    width: 10.8vw;
-    height: 14.2vw;
+    width: 10.5vw;
+    height: 13.5vw;
     object-fit: cover;
-    object-position: 42% 20%;
-    border: .1vw solid #111;
-    border-radius: .5vw;
+    object-position: 50% 18%;
+    border: .08vw solid #111;
+    border-radius: .4vw;
   }
 
   .about-grid p {
     margin: 0;
-    font-size: 1vw;
-    line-height: 1.5;
+    font-size: .94vw;
+    line-height: 1.45;
   }
 
   .panel-link {
     display: flex;
     justify-content: space-between;
-    padding: .35vw 1.4vw 1.3vw;
-    font-size: .98vw;
+    padding: .3vw 1.2vw 1.1vw;
+    font-size: .92vw;
     font-weight: 900;
   }
 
-  .mission-window ul {
-    list-style: none;
-    margin: 0;
-    padding: .85vw 1.15vw .35vw;
+  .mission-terminal {
+    margin: 1vw;
+    padding: 1vw 1.2vw;
+    background: #090b0c;
+    color: #83f56b;
+    border-radius: .35vw;
+    font-size: .95vw;
+    line-height: 1.45;
   }
 
-  .mission-window li {
-    padding: .42vw 0;
-    border-bottom: .05vw solid rgba(0, 0, 0, .15);
-    font-size: .96vw;
+  .mission-terminal p {
+    margin: .15vw 0;
   }
 
-  .mission-window .done {
-    color: #7b7378;
-    text-decoration: line-through;
+  .cursor {
+    animation: blink 1s steps(1) infinite;
   }
 
-  .mission-bottom {
-    padding: .65vw 1.15vw 1vw;
-    display: flex;
-    align-items: center;
-    gap: .65vw;
-    font-size: .96vw;
-  }
-
-  .mission-bottom strong { color: #e33e94; }
-
-  .hearts {
-    margin-left: auto;
-    color: #e33e94;
-    font-size: 1.1vw;
+  @keyframes blink {
+    50% { opacity: 0; }
   }
 
   .connect-links {
-    padding: .4vw 1vw .8vw;
+    padding: .35vw 1vw .7vw;
   }
 
   .connect-links a {
@@ -581,7 +637,7 @@ const thumbFor = (caseNumber: string) => {
     justify-content: space-between;
     padding: .7vw 0;
     border-bottom: .05vw solid rgba(0, 0, 0, .15);
-    font-size: .98vw;
+    font-size: .94vw;
     text-decoration: none;
   }
 
@@ -612,91 +668,113 @@ const thumbFor = (caseNumber: string) => {
 
   @media (max-width: 760px) {
     .hero {
-      height: auto;
       min-height: 0;
-      padding: 58px 18px 34px;
+      padding: 42px 18px 34px;
       grid-template-columns: 1fr;
-      gap: 28px;
+      gap: 24px;
       text-align: center;
-      background:
-        radial-gradient(circle, rgba(240, 110, 189, .36) 0 15px, transparent 16px)
-        0 0 / 88px 88px,
-        #fffaf7;
     }
 
     .avatar-column {
-      width: fit-content;
+      width: 250px;
+      height: 250px;
       margin: 0 auto;
-      padding-top: 20px;
+    }
+
+    .avatar-grid {
+      inset: -18px -12px -14px -10px;
+      background-size: 12px 12px;
     }
 
     .avatar-ring {
-      width: 230px;
-      height: 230px;
-      border-width: 4px;
+      width: 225px;
+      height: 225px;
+      border-width: 2px;
     }
 
     .note-bubble {
-      left: -6px;
-      top: -12px;
-      padding: 9px 10px;
-      font-size: 12px;
+      left: -4px;
+      top: -10px;
+      padding: 8px 10px;
+      border-width: 1px;
+      font-size: 11px;
+    }
+
+    .name-row {
+      justify-content: center;
     }
 
     h1 {
-      margin-bottom: 28px;
-      font-size: clamp(3.8rem, 16vw, 6rem);
+      margin-bottom: 22px;
+      font-size: clamp(3.6rem, 16vw, 5.8rem);
       white-space: normal;
+    }
+
+    .sparkle {
+      font-size: 28px;
     }
 
     .role-strip {
       margin-inline: auto;
-      padding: 11px 14px;
-      font-size: 13px;
-      font-weight: 900;
+      padding: 10px 13px;
+      font-size: 12px;
       white-space: normal;
     }
 
-    .dialog {
-      width: min(520px, 100%);
-      margin: 18px auto 0;
-      border-width: 2px;
+    .hero-tagline {
+      margin-top: 18px;
+      font-size: 13px;
+    }
+
+    .location {
+      margin-top: 13px;
+      font-size: 12px;
+    }
+
+    .status-card {
+      width: min(320px, 100%);
+      min-height: 0;
+      margin: 0 auto;
+      padding: 16px;
       text-align: left;
+      font-size: 12px;
     }
 
-    .dialog-title {
-      padding: 7px 10px;
-      font-size: 11px;
-      border-bottom-width: 2px;
+    .status-prompt {
+      font-size: 18px;
     }
 
-    .dialog-message {
-      padding: 18px 20px 22px;
-      font-size: 24px;
+    .status-skull {
+      font-size: 18px;
     }
 
-    .heart {
-      right: 15px;
-      bottom: 8px;
-      font-size: 24px;
+    .home-nav {
+      min-height: 54px;
+      padding: 0 14px;
     }
 
-    .sprite-column { display: none; }
+    .home-nav-links {
+      gap: 18px;
+    }
+
+    .home-nav a {
+      font-size: 10px;
+    }
+
+    .home-nav-status {
+      display: none;
+    }
 
     .dashboard {
       padding: 18px;
       grid-template-columns: 1fr;
       gap: 18px;
-      background:
-        radial-gradient(circle, rgba(240, 110, 189, .2) 0 14px, transparent 15px)
-        16px 20px / 88px 88px,
-        #fffaf7;
     }
 
     .window {
       border-width: 2px;
       border-radius: 9px;
-      box-shadow: 5px 6px 0 #111;
+      box-shadow: 4px 5px 0 #111;
     }
 
     .window-title {
@@ -711,7 +789,9 @@ const thumbFor = (caseNumber: string) => {
       font-size: 11px;
     }
 
-    .case-list { padding: 8px 10px 0; }
+    .case-list {
+      padding: 8px 10px 0;
+    }
 
     .case-card {
       min-height: 0;
@@ -729,16 +809,22 @@ const thumbFor = (caseNumber: string) => {
       border-radius: 7px;
     }
 
-    .case-body { padding-bottom: 24px; }
+    .case-body {
+      padding-bottom: 24px;
+    }
 
-    .tags { gap: 5px; }
+    .tags {
+      gap: 5px;
+    }
 
     .tags span {
       padding: 4px 7px;
       font-size: 9px;
     }
 
-    time { font-size: 10px; }
+    time {
+      font-size: 10px;
+    }
 
     .case-card h2 {
       margin: 12px 0 7px;
@@ -758,7 +844,9 @@ const thumbFor = (caseNumber: string) => {
       font-size: 12px;
     }
 
-    .sidebar { gap: 16px; }
+    .sidebar {
+      gap: 16px;
+    }
 
     .about-grid {
       padding: 12px;
@@ -768,7 +856,7 @@ const thumbFor = (caseNumber: string) => {
 
     .about-grid img {
       width: 110px;
-      height: 155px;
+      height: 150px;
       border-width: 1px;
       border-radius: 7px;
     }
@@ -782,21 +870,11 @@ const thumbFor = (caseNumber: string) => {
       font-size: 11px;
     }
 
-    .mission-window ul {
-      padding: 12px 14px 5px;
-    }
-
-    .mission-window li {
-      padding: 6px 0;
+    .mission-terminal {
+      margin: 12px;
+      padding: 12px 14px;
       font-size: 11px;
     }
-
-    .mission-bottom {
-      padding: 8px 14px 13px;
-      font-size: 11px;
-    }
-
-    .hearts { font-size: 16px; }
 
     .connect-links {
       padding: 5px 12px 10px;
