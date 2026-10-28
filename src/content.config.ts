@@ -9,6 +9,7 @@ const posts = defineCollection({
     seoTitle: z.string().optional(),
     technicalSummary: z.string().optional(),
     labType: z.string().optional(),
+    sourceRepo: z.string().url().optional(),
     publishedAt: z.coerce.date(),
     caseNumber: z.string(),
     status: z.enum(['open', 'solved', 'ongoing']).default('ongoing'),

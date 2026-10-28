@@ -2,7 +2,7 @@
 import ArticleBaseLayout from './ArticleBaseLayout.astro';
 
 const { entry } = Astro.props;
-const { title, description, seoTitle, technicalSummary, labType, caseNumber, status, tags, publishedAt, readTime, aiGrade } = entry.data;
+const { title, description, seoTitle, technicalSummary, labType, sourceRepo, caseNumber, status, tags, publishedAt, readTime, aiGrade } = entry.data;
 ---
 <ArticleBaseLayout title={`${seoTitle ?? title} | Sky Blu DeGrate`} description={technicalSummary ?? description} article={{ headline: title, publishedAt, tags }}>
   <article>
@@ -17,7 +17,7 @@ const { title, description, seoTitle, technicalSummary, labType, caseNumber, sta
       <h1>{title}</h1>
       <p class="deck">{description}</p>
       <p class="byline">By <a href="/about" rel="author">Sky Blu DeGrate</a> · {labType ?? 'Personal cybersecurity lab'}</p>
-      {technicalSummary && <aside class="technical-summary" aria-label="Technical summary"><strong>What this case demonstrates</strong><p>{technicalSummary}</p></aside>}
+      {technicalSummary && <aside class="technical-summary" aria-label="Technical summary"><strong>What this case demonstrates</strong><p>{technicalSummary}</p>{sourceRepo && <p><a href={sourceRepo}>Project documentation and evidence on GitHub ↗</a></p>}</aside>}
 
       <dl class="metadata">
         <div><dt>PUBLISHED</dt><dd><time datetime={publishedAt.toISOString().slice(0, 10)}>{publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC' })}</time></dd></div>

@@ -3,6 +3,7 @@ title: "the hacker forgot how cron works"
 seoTitle: "Linux DFIR: Hack The Box LuckyShot Investigation"
 technicalSummary: "A Hack The Box LuckyShot forensic investigation tracing SSH access, credential exfiltration and Linux persistence, with separate findings for observed execution, configured access and rejected cron jobs."
 labType: "Hack The Box training investigation"
+sourceRepo: "https://github.com/documentationprincess/LuckyShot-Linux-DFIR"
 description: "A Linux compromise involving credential theft, persistence, exfiltration, and an attacker who apparently skipped the cron documentation."
 publishedAt: 2026-08-10
 caseNumber: "003"
