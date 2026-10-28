@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "verify:seo": "python3 scripts/verify_seo.py"
   },
   "dependencies": {
     "astro": "^7.1.0"

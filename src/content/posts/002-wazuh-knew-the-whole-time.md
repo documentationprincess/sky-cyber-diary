@@ -1,5 +1,8 @@
 ---
 title: "wazuh knew the whole time"
+seoTitle: "Windows Incident Investigation with Wazuh and Sysmon"
+technicalSummary: "A controlled Windows lab correlating Sysmon process, file, DNS, network and registry events into a timeline, and distinguishing collected telemetry from analyst-visible Wazuh alerts."
+labType: "Controlled personal lab"
 description: "I investigated my own fake Windows incident and discovered the SIEM had the evidence the entire time. Very helpful."
 publishedAt: 2026-08-09
 caseNumber: "002"

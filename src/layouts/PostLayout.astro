@@ -2,9 +2,9 @@
 import ArticleBaseLayout from './ArticleBaseLayout.astro';
 
 const { entry } = Astro.props;
-const { title, description, caseNumber, status, tags, publishedAt, readTime, aiGrade } = entry.data;
+const { title, description, seoTitle, technicalSummary, labType, caseNumber, status, tags, publishedAt, readTime, aiGrade } = entry.data;
 ---
-<ArticleBaseLayout title={`${title} — Documentation Princess`} description={description}>
+<ArticleBaseLayout title={`${seoTitle ?? title} | Sky Blu DeGrate`} description={technicalSummary ?? description} article={{ headline: title, publishedAt, tags }}>
   <article>
     <header class="post-header">
       <a class="back" href="/">← CASE FILES</a>
@@ -16,9 +16,11 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
 
       <h1>{title}</h1>
       <p class="deck">{description}</p>
+      <p class="byline">By <a href="/about" rel="author">Sky Blu DeGrate</a> · {labType ?? 'Personal cybersecurity lab'}</p>
+      {technicalSummary && <aside class="technical-summary" aria-label="Technical summary"><strong>What this case demonstrates</strong><p>{technicalSummary}</p></aside>}
 
       <dl class="metadata">
-        <div><dt>PUBLISHED</dt><dd>{publishedAt.toLocaleDateString('en-US')}</dd></div>
+        <div><dt>PUBLISHED</dt><dd><time datetime={publishedAt.toISOString().slice(0, 10)}>{publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC' })}</time></dd></div>
         <div><dt>READ TIME</dt><dd>{readTime ?? 'Unknown'}</dd></div>
         <div><dt>AI GRADE</dt><dd>{aiGrade ?? 'Pending review'}</dd></div>
         <div><dt>TAGS</dt><dd>{tags.join(', ')}</dd></div>
@@ -32,6 +34,10 @@ const { title, description, caseNumber, status, tags, publishedAt, readTime, aiG
 </ArticleBaseLayout>
 
 <style is:global>
+  .byline { font-size: .95rem; line-height: 1.6; }
+  .byline a { font-weight: 700; }
+  .technical-summary { max-width: 760px; margin-top: 24px; padding: 20px; border: 2px solid var(--ink); background: var(--paper); border-left: 7px solid var(--accent); line-height: 1.6; }
+  .technical-summary p { margin: 8px 0 0; }
   .post-header {
     padding: 64px 0 42px;
     border-bottom: 2px solid var(--ink);

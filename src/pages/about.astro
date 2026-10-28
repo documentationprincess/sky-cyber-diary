@@ -1,10 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { identity } from '../data/identity';
 ---
-<BaseLayout title="About — Documentation Princess">
+<BaseLayout title="About Sky Blu DeGrate | IT Support & Cybersecurity" description="Meet Sky Blu DeGrate: an IT support professional in Brooklyn, CompTIA Security+ certified, documenting Windows, Linux and security investigations as Documentation Princess." pageType="ProfilePage">
   <section class="about-page">
     <p class="eyebrow">Operator profile</p>
-    <h1>Hi, I’m Sky.</h1>
+    <h1>Hi, I’m Sky<br />Blu DeGrate.</h1>
+    <p class="intro">IT support. Cybersecurity. Still asking why the computer did that.</p>
+
+    <p>
+      I’m an IT support professional based in Brooklyn, New York, with more than five years
+      of experience helping people troubleshoot hardware, software, accounts and connectivity.
+      My background includes Windows and macOS support, Microsoft 365 and Google Workspace,
+      account access, MFA, onboarding and documentation. I earned CompTIA Security+ in February 2026.
+    </p>
 
     <p>
       I’m documenting my path into cybersecurity: the labs I build, the attacks I study,
@@ -16,6 +25,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       This site is part technical portfolio, part field journal, and part evidence that
       persistence occasionally defeats configuration files.
     </p>
+
+    <h2>The work behind the case files</h2>
+    <p>
+      These are personal labs and training investigations. I build the environment, follow
+      the evidence, write down what broke, and distinguish what I observed from what I only
+      expected to happen.
+    </p>
+    <ul class="case-list">
+      <li><a href="/case-files/001-windows-is-a-snitch">Wazuh + Sysmon endpoint detection</a><p>Getting a Windows endpoint talking to an Ubuntu-hosted manager, fixing enrollment, and validating a custom detection rule.</p></li>
+      <li><a href="/case-files/002-wazuh-knew-the-whole-time">Windows incident investigation</a><p>Connecting process, file, DNS, network and registry events into a timeline, then working out why collected events did not all become alerts.</p></li>
+      <li><a href="/case-files/003-the-hacker-forgot-how-cron-works">Linux forensics with LuckyShot</a><p>Reconstructing a Hack The Box training incident through authentication logs, shell history and persistence artifacts. Configured, attempted and observed are different findings.</p></li>
+    </ul>
+
+    <h2>There’s a creative side, too.</h2>
+    <p>
+      My background includes Screen Studies at The New School and software-development
+      training at Flatiron School. Film, storytelling and building things for the web are
+      part of how I approach technical work: notice the details, understand the sequence,
+      and explain what happened clearly.
+    </p>
+    <p>The name here is Documentation Princess. The person behind it is Sky Blu DeGrate.</p>
+
+    <nav class="profile-links" aria-label="Professional profiles">
+      <a href={identity.github} rel="me noreferrer">GitHub ↗</a>
+      <a href={identity.linkedin} rel="me noreferrer">LinkedIn ↗</a>
+      <a href="/#case-files">Read the case files →</a>
+    </nav>
   </section>
 </BaseLayout>
 
@@ -48,6 +84,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: clamp(1.08rem, 1.65vw, 1.35rem);
     line-height: 1.62;
   }
+
+  h2 { margin: 58px 0 22px; font-family: Arial, Helvetica, sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -.035em; }
+  .intro { font-weight: 800; }
+  .case-list { padding-left: 24px; max-width: 780px; font-size: 1.05rem; line-height: 1.65; }
+  .case-list li { margin-bottom: 28px; padding-left: 6px; }
+  .case-list a { font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .case-list p { margin: 8px 0 0; }
+  .profile-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+  .profile-links a { border: 2px solid var(--ink); background: var(--pink-soft); padding: 12px 16px; box-shadow: 3px 3px 0 var(--ink); font-weight: 800; text-decoration: none; }
+  .profile-links a:hover { background: var(--green); }
 
   @media (max-width: 650px) {
     .about-page {

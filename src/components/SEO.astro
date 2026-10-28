@@ -1,0 +1,49 @@
+---
+import { identity, person } from '../data/identity';
+
+interface Props {
+  title: string;
+  description: string;
+  pageType?: 'WebPage' | 'ProfilePage';
+  article?: { headline: string; publishedAt: Date; tags: string[] };
+}
+
+const { title, description, pageType = 'WebPage', article } = Astro.props;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonical = new URL(pathname, Astro.site ?? identity.site).href;
+const shareImage = new URL('/ui/docdocs-avatar.jpg', Astro.site ?? identity.site).href;
+const website = {
+  '@type': 'WebSite', '@id': `${identity.site}/#website`,
+  url: `${identity.site}/`, name: identity.brand, creator: { '@id': person['@id'] },
+};
+const page = article ? {
+  '@type': 'BlogPosting', '@id': `${canonical}#article`,
+  url: canonical, mainEntityOfPage: canonical,
+  headline: article.headline, description,
+  datePublished: article.publishedAt.toISOString().slice(0, 10),
+  author: { '@id': person['@id'] },
+  keywords: article.tags.join(', '),
+  isPartOf: { '@id': website['@id'] },
+} : {
+  '@type': pageType, '@id': `${canonical}#page`,
+  url: canonical, name: title, description,
+  isPartOf: { '@id': website['@id'] },
+  ...(pageType === 'ProfilePage' ? { mainEntity: { '@id': person['@id'] } } : { about: { '@id': person['@id'] } }),
+};
+const graph = { '@context': 'https://schema.org', '@graph': [person, website, page] };
+---
+<link rel="canonical" href={canonical} />
+<meta name="author" content={identity.name} />
+<meta property="og:type" content={article ? 'article' : 'website'} />
+<meta property="og:site_name" content={identity.brand} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={shareImage} />
+<meta property="og:image:alt" content="Sky Blu DeGrate — Documentation Princess" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={shareImage} />
+{article && <meta property="article:published_time" content={article.publishedAt.toISOString()} />}
+<script type="application/ld+json" set:html={JSON.stringify(graph).replace(/</g, '\\u003c')} />

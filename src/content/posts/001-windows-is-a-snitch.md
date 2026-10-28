@@ -1,5 +1,8 @@
 ---
 title: "windows is a snitch"
+seoTitle: "Wazuh and Sysmon Home Lab: Endpoint Detection"
+technicalSummary: "A personal Windows and Ubuntu lab tracing Sysmon Event ID 1 through Wazuh, from VM networking and agent enrollment to custom rule 100100 and a verified level-10 alert."
+labType: "Personal home lab"
 description: "I wanted SOC experience and apparently the solution was creating more problems for myself with several computers."
 publishedAt: 2026-08-08
 caseNumber: "001"

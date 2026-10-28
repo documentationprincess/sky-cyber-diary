@@ -6,6 +6,9 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    seoTitle: z.string().optional(),
+    technicalSummary: z.string().optional(),
+    labType: z.string().optional(),
     publishedAt: z.coerce.date(),
     caseNumber: z.string(),
     status: z.enum(['open', 'solved', 'ongoing']).default('ongoing'),

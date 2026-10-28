@@ -1,12 +1,15 @@
 ---
+import SEO from '../components/SEO.astro';
 interface Props {
   title?: string;
   description?: string;
+  article?: { headline: string; publishedAt: Date; tags: string[] };
 }
 
 const {
   title = 'How I Tricked AI Into Doing My Bidding',
-  description = 'A cybersecurity diary by Sky.'
+  description = 'A cybersecurity diary by Sky Blu DeGrate.',
+  article
 } = Astro.props;
 ---
 <!doctype html>
@@ -17,6 +20,7 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <SEO title={title} description={description} article={article} />
     <link rel="icon" type="image/jpeg" href="/ui/docdocs-avatar.jpg" />
   </head>
 
@@ -31,6 +35,7 @@ const {
         <a href="/">Case files</a>
         <a href="/about">About</a>
         <a href="https://github.com/documentationprincess" rel="noreferrer">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/skydegrate/" rel="me noreferrer">LinkedIn ↗</a>
       </nav>
     </header>
 
@@ -40,7 +45,7 @@ const {
 
     <footer class="article-footer">
       <span>Built with Astro. Debugged with spite.</span>
-      <span>© {new Date().getFullYear()} Sky</span>
+      <span>© {new Date().getFullYear()} Sky Blu DeGrate</span>
     </footer>
   </body>
 </html>
@@ -138,7 +143,7 @@ const {
   }
 
   @media (max-width: 700px) {
-    .article-site-header { align-items: flex-start; }
+    .article-site-header { align-items: flex-start; flex-wrap: wrap; }
     .article-status { display: none; }
     .article-site-header nav { gap: 10px; font-size: .78rem; }
     .article-footer { flex-direction: column; }

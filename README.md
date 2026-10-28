@@ -1,6 +1,6 @@
-# How I Tricked AI Into Doing My Bidding
+# Documentation Princess
 
-An Astro starter for Sky's cybersecurity diary.
+Sky Blu DeGrate's IT support and cybersecurity portfolio at https://femalethreat.actor.
 
 ## Run locally
 
@@ -31,10 +31,22 @@ Then reference them in Markdown:
 ![Description](/images/case-001/example.png)
 ```
 
-## Before deployment
+## Search metadata and publication
 
-1. Replace `https://example.com` in `astro.config.mjs`.
-2. Replace the GitHub link in `src/layouts/BaseLayout.astro`.
-3. Edit the About page.
-4. Replace the placeholder root-cause text in Case 001.
-5. Run `npm run build`.
+`src/components/SEO.astro` provides canonical URLs, social metadata and linked Person,
+WebSite, ProfilePage and BlogPosting data. Professional identity and profile links live in
+`src/data/identity.ts`; the production domain is also set in `astro.config.mjs`.
+
+Case files retain their original titles and text. Optional `seoTitle`, `technicalSummary`
+and `labType` frontmatter clarify the topic and training context. Keep summaries faithful
+to the article; never describe a personal lab as paid production work.
+
+`/sitemap.xml` is generated from the content collection at build time. `/robots.txt`
+advertises it. New posts automatically enter the sitemap without an invented update date.
+
+Before publishing, run `npm run build` and `npm run verify:seo`. Review the changed page
+at desktop and phone widths. The GitHub `main` branch publishes through the existing
+Vercel integration. Verify the live domain after deployment; a successful local build
+does not establish publication or Google indexing. Preserve the Search Console ownership
+tag. Search Console can accept the sitemap and indexing requests, but rankings remain
+outside this site's control.
